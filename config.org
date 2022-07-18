@@ -93,9 +93,10 @@
 ** Ur stuff
 ** Also make sure to install all-the-icons on MELPA for some of the icons to be insatlled
 #+begin_src emacs-lisp
-      (use-package neotree
-      :ensure t)
-      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (use-package neotree
+  :ensure t)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  
 #+end_src
 
 * Keybinds
@@ -154,4 +155,21 @@
 	   (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp)
 
+#+end_src
+
+* All-The-Icons
+** Icons :D
+#+begin_src emacs-lisp
+  (use-package all-the-icons
+  :ensure t 
+  :if (display-graphic-p))
+#+end_src
+
+* Projectile
+** Projects that you will never finish
+#+begin_src emacs-lisp
+  (use-package projectile
+  :ensure t)
+
+  
 #+end_src
