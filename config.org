@@ -1,0 +1,157 @@
+#+TITLE: Tenshi Emacs
+#+AUTHOR: Diego Aguilera
+
+* READ ME
+** This Emacs config is mainly for me but I decided to make it out so people can try it or even have a grip to emacs.
+** Again. This is mainly for me and is not trying to be like Doom Emacs or SpaceEmacs.
+** Also some of the code is referenced from DistroTube's config of Emacs
+
+* Package managment
+** To add packages easier to emacs
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+  (package-initialize)
+#+end_src
+
+* Use-package
+** its self explanitory
+#+begin_src emacs-lisp
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(setq use-package-always-ensure t)
+#+end_src
+
+* Evil mode
+** you can use emacs like vim or vi or neovim or whatever.
+#+begin_src emacs-lisp
+    ;; Enable Evil
+    (use-package evil
+     :ensure t)
+    (evil-mode 1)
+#+end_src
+
+* Doom Themes
+** Doom emacs theme. I love them alot
+#+begin_src emacs-lisp
+    (use-package doom-themes
+    :ensure t)
+      ;; Global settings (defaults)
+      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+	    doom-themes-enable-italic t) ; if nil, italics is universally disabled
+      (load-theme 'doom-tokyo-night t)
+#+end_src
+
+* Font
+** Source Code Pro supremacy.
+** add your own
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil
+  :font "Source Code Pro"
+  :height 105
+  :weight 'medium)
+(set-face-attribute 'variable-pitch nil
+  :font "Source Code Pro"
+  :height 105
+  :weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+  :font "Source Code Pro"
+  :height 105
+  :weight 'medium)
+#+end_src
+
+* Dashboard
+** Hello :D
+** Also make sure to install all-the-icons for some of the icons to be insatlled
+#+begin_src emacs-lisp
+    (use-package dashboard
+    :ensure t)
+      :init
+	(setq dashboard-set-file-icons t)
+	(setq dashboard-set-heading-icons t)
+	(setq dashboard-banner-logo-title "Welcome to Tenshi Emacs :D")
+	(setq dashboard-startup-banner "~/.emacs.d/tenshi.png")  ;; use custom image as banner
+	;;(setq dashboard-center-content nil) ;; set to 't' for centered content
+	(setq dashboard-items '((recents . 5)
+				(agenda . 5 )
+				(bookmarks . 3)
+				(projects . 3)
+				(registers . 3)))
+	(dashboard-setup-startup-hook)
+#+end_src
+
+* Which-key
+** Wanna see whats next?
+#+begin_src emacs-lisp
+    (use-package which-key
+    :ensure t)
+    (which-key-mode)
+#+end_src
+
+* Neotree
+** Ur stuff
+** Also make sure to install all-the-icons on MELPA for some of the icons to be insatlled
+#+begin_src emacs-lisp
+      (use-package neotree
+      :ensure t)
+      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+#+end_src
+
+* Keybinds
+#+begin_src emacs-lisp
+    (use-package general
+    :config
+    (general-evil-setup t))
+
+  (nvmap :prefix "SPC"
+    "." '(find-file :which-key "find file")
+    "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+    ;;neotree
+    "t n"   '(neotree-toggle :which-key "Toggle neotree file viewer")
+    "d n"   '(neotree-dir :which-key "Open directory in neotree")
+    ;;buffer
+     "b i"   '(ibuffer :which-key "Ibuffer"))
+
+
+#+end_src
+
+* Haxe Support
+** Haxe is a language which can be a alternative to Flash's ActionScript and used to be used to make Flash Games. Now you can use .XML files for your games and export to web and Desktop.
+** you can delete this section if you dont use haxe.
+#+begin_src emacs-lisp
+  (use-package haxe-mode
+    :mode ("\\.hx\\'" . haxe-mode)
+    :no-require t
+    :init
+    (require 'js)
+    (define-derived-mode haxe-mode js-mode "Haxe"
+      "Haxe syntax highlighting mode. This is simply using js-mode for now."))
+
+  (use-package battle-haxe
+    :hook (haxe-mode . battle-haxe-mode)
+    :bind (("S-<f4>" . #'pop-global-mark) ;To get back after visiting a definition
+	   :map battle-haxe-mode-map
+	   ("<f4>" . #'battle-haxe-goto-definition)
+	   ("<f12>" . #'battle-haxe-helm-find-references))
+    :custom
+    (battle-haxe-yasnippet-completion-expansion t "Keep this if you want yasnippet to expand completions when it's available.")
+    (battle-haxe-immediate-completion nil "Toggle this if you want to immediately trigger completion when typing '.' and other relevant prefixes."))
+#+end_src
+
+* lsp-mode
+** yay language support
+** ALSO you need to install lua-mode on MELPA for the lsp language server to work(i think)
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :init
+    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+    (setq lsp-keymap-prefix "C-c l")
+    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+	   (c-mode . lsp)
+	   (lua-mode . lsp)
+	   ;; if you want which-key integration
+	   (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+
+#+end_src

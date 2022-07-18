@@ -1,0 +1,9 @@
+.cache/
+auto-save-list/
+elpa/
+eshell/
+snippets/
+.lsp-session-v1
+config.org~
+init.el~
+recentf
