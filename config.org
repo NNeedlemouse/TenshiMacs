@@ -117,7 +117,7 @@
 
 #+end_src
 
-* Haxe Support
+* Haxe Support (OPTIONAL)
 ** Haxe is a language which can be a alternative to Flash's ActionScript and used to be used to make Flash Games. Now you can use .XML files for your games and export to web and Desktop.
 ** you can delete this section if you dont use haxe.
 #+begin_src emacs-lisp
