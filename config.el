@@ -109,3 +109,12 @@
 (use-package doom-modeline
 :ensure t
 :init (doom-modeline-mode 1))
+
+(use-package vterm
+    :ensure t)
+(add-to-list 'display-buffer-alist
+   '("\*vterm\*"
+     (display-buffer-in-side-window)
+     (window-height . 0.25)
+     (side . bottom)
+     (slot . 0)))

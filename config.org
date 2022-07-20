@@ -183,3 +183,27 @@
   :ensure t
   :init (doom-modeline-mode 1))
 #+end_src
+
+* Gdscript (optional)
+** Gdscript is the programming language for the open source game engine Godot Engine.
+#+begin_script emacs-lisp
+(use-package gdscript-mode
+    :straight (gdscript-mode
+               :type git
+               :host github
+               :repo "godotengine/emacs-gdscript-mode"))
+#+end_script
+
+* Vterm
+** Yay
+#+begin_src emacs-lisp
+  (use-package vterm
+      :ensure t)
+  (add-to-list 'display-buffer-alist
+     '("\*vterm\*"
+       (display-buffer-in-side-window)
+       (window-height . 0.25)
+       (side . bottom)
+       (slot . 0)))
+
+#+end_src
