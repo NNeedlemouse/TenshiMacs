@@ -95,7 +95,8 @@
 	 (c-mode . lsp)
 	 (lua-mode . lsp)
 	 (c++-mode . lsp)
-         (python-mode . lsp)
+	 (python-mode . lsp)
+         (javascript-mode . lsp)
 	 ;; if you want which-key integration
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
