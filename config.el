@@ -62,6 +62,7 @@
 (nvmap :prefix "SPC"
   "." '(find-file :which-key "find file")
   "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+  "t o"   '(vterm :which-key "Open vterm")
   ;;neotree
   "t n"   '(neotree-toggle :which-key "Toggle neotree file viewer")
   "d n"   '(neotree-dir :which-key "Open directory in neotree")

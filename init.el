@@ -12,6 +12,10 @@
 (setq ring-bell-function 'ignore)
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 (add-hook 'after-init-hook 'global-company-mode)
+(setq-default message-log-max nil)
+(kill-buffer "*Messages*")
+(setq warning-minimum-level :emergency)
+(setq frame-resize-pixelwise t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
